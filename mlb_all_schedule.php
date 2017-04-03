@@ -91,7 +91,7 @@ function mlb_schedule(){
 				$games=json_decode($c,TRUE);
 			}
 			if(!isset($games['data']['games']['game'])){
-				break;
+				continue;
 			}
 			$games=$games['data']['games']['game'];
 			$gm=array();
@@ -113,8 +113,10 @@ function mlb_schedule(){
 					'away'=>$games[$i]['away_name_abbrev']
 				);
 			}
-			ksort($gm);
-			$g[$m][$d]=$gm;
+			if(count($gm)){
+				ksort($gm);
+				$g[$m][$d]=$gm;
+			}
 		}
 	}
 
